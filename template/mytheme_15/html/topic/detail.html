@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{include file="seo/topic_detail"} 
+		{include file="block/include"}
+	</head>
+	<body>
+		{include file="block/head"}	
+		<div class="container">
+			<div class="row">
+				<!-- 详细信息 -->
+				<div class="stui-pannel clearfix">
+					<div class="stui-pannel-box clearfix">
+						<div class="stui-pannel-bd">
+							<div class="stui-topic__item col-pd">
+								<p><img class="img-responsive" src="{:mac_url_img($obj.topic_pic)}"/></p>																								
+					    		<h1>{$obj.topic_name}</h1>
+					        	<p class="text-muted">{$obj.topic_content|mac_filter_html}</p>	
+							</div>							
+					    </div>
+					</div>					
+				</div>
+				<!-- end 详细信息 -->
+				
+				<!-- 列表 -->
+				<div class="stui-pannel clearfix">
+					<div class="stui-pannel-box">
+						<div class="stui-pannel_hd">
+							<div class="stui-pannel__head clearfix">
+								<span class="text-muted pull-right">本专题共“{$obj.vod_list|count}”部视频</span>
+								<h3 class="title">
+									该专题包含的影片
+								</h3>														
+							</div>								
+						</div>
+						<div class="stui-pannel_bd clearfix">
+							<ul class="stui-vodlist clearfix">
+								{maccms:foreach name="$obj.vod_list"}
+								{include file="block/vod_box"}													
+								{/maccms:foreach}	 
+							</ul>	
+						</div>
+					</div>				
+				</div>	
+				<!-- end 列表 -->
+					
+			</div>
+		</div>
+
+		{include file="block/foot"}
+	</body>
+</html>

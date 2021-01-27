@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+    <meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+    {include file="public/include"}
+</head>
+<body>
+<header class="stui-header">
+    <span class="stui-header__left"><a href="javascript:MAC.GoBack()"><i class="iconfont icon-left"></i>返回</a></span>
+    <span class="stui-header__center">在线播放</span>
+    <span class="stui-header__right">
+    	<a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a>
+    	<!--<a href="javascript:void(0);" class="mac_ulog btn btn-default" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"><i class="iconfont icon-favorite"></i></a>-->
+    </span>
+</header>
+{include file="public/head"}
+<div class="page__bd">	
+	<div class="weui-panel">
+		<div class="stui-player embed-responsive embed-responsive-16by9 clearfix">
+			{$player_data}{$player_js}
+		</div>
+		<div class="weui-media-box weui-media-box_appmsg">
+		    <div class="weui-media-box__bd">
+		      	<h4 class="weui-media-box__title">
+		      		<a class="font-14 text-999 open-popup pull-right" href="javascript:;" data-target="#desc">简介<i class="iconfont icon-right"></i></a>
+		      		{$obj.vod_name}
+		      	</h4>
+            	<p class="weui-media-box__desc">{$obj.vod_score}分·{$obj.vod_year|mac_default='内详'}·{$obj.vod_area|mac_default='内详'}·{$obj.vod_class}·{$obj.vod_hits}次播放</p>
+		    </div>		    
+		</div>
+	</div>
+	
+	{maccms:foreach name="obj.vod_play_list" id="vo"}
+	<div class="weui-panel weui-panel_access">  		
+	    <div class="weui-panel__hd">
+	    	<span class="tips pull-right">{$vo.player_info.tip}</span>
+	    	{$vo.player_info.show}
+	    </div>
+		<div class="weui-panel__bd">
+      		<div class="weui-media-box weui-media-box_text">      		
+	        	<ul class="stui-playlist clearfix">
+					{maccms:foreach name="vo.urls" id="vo2"}
+		            <li {if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}class="active"{/if}><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+		            {/maccms:foreach}
+				</ul>
+      		</div>  		      		
+      	</div>		    
+	</div>
+	{/maccms:foreach}
+	
+	{include file="vod/like"}
+</div>
+<div id="desc" class='weui-popup__container popup-bottom'>
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-panel">
+			<div class="weui-panel__hd">
+				<a class="tips pull-right close-popup" href="javascript:;">关闭</a>
+				影片简介
+			</div>
+			 <div class="weui-panel__bd">
+				<a class="weui-media-box weui-media-box_appmsg" href="{:mac_url_vod_detail($obj)}">
+				    <div class="weui-media-box__hd" href="{:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}">
+				    	<span class="list-thumb lazyload" data-original="{:mac_url_img($obj.vod_pic)}"></span>
+				    </div>
+				    <div class="weui-media-box__bd">
+				      	<h4 class="weui-media-box__title">{$obj.vod_name}<span class="iconscore">{$obj.vod_score}</span></h4>
+				      	<p class="weui-media-box__desc">状态：<span class="remarks">{if condition="$obj.vod_remarks neq ''"}{$obj.vod_remarks}{elseif condition="$obj.vod_serial gt 0"}第{$obj.vod_serial}集{else /}已完结{/if}</span></p>		      				      	
+				      	<p class="weui-media-box__desc">信息：{$obj.vod_class}·{$obj.vod_area|mac_default='内详'}·{$obj.vod_year|mac_default='内详'}</p>
+				      	<p class="weui-media-box__desc">主演：{$obj.vod_actor|mac_default='内详'}</p>
+				    </div>
+				    <div class="weui-media__ft"><i class="iconfont icon-right"></i></div>
+				</a>							
+				<div class="weui-media-box weui-media-box_appmsg">
+				    <div class="weui-media-box__bd">
+				      	<p>{$obj.vod_content|mac_filter_html|mac_substring=60}...</p>
+				    </div>		    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="public/foot"}
+<span class="mac_hits hits" style="display: none;" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-type="hits"></span>
+<span class="mac_ulog_set" style="display: none;" data-type="1" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+<script type="text/javascript">$(".MacPlayer").addClass("embed-responsive").css("padding-bottom","56.25%");</script>
+</body>
+</html>

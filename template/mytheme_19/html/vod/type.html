@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="seo/vod_type"}   
+	{include file="block/include"}
+</head>
+<body>
+	{include file="block/head"}
+    <div class="container">
+        <div class="row">
+        	<div class="stui-warp-head">  
+        		{include file="block/menu"}<!-- 小分类 -->
+        	</div>
+        	<div class="stui-warp-content">
+				<div class="stui-pannel clearfix">
+					{if condition="$obj.type_name neq ''"}
+					<div class="stui-pannel__head clearfix">
+						<h3 class="title">
+							{$obj.type_name}
+						</h3>						
+					</div>	
+					{/if}	
+					<div class="stui-pannel-bd">
+						<!-- 列表 -->			
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="40" paging="yes" type="current" order="desc" by="sort"}
+							<li>
+								{include file="block/vod_box"}
+							</li>					
+							{/maccms:vod}	 
+						</ul>
+						<!-- end 列表 -->
+					</div>	
+					<div class="stui-pannel-ft">
+						{include file="block/page"}<!-- 翻页-->		
+					</div>
+				</div>			
+			</div>
+        </div>
+    </div>
+	{include file="block/foot"}
+</body>
+</html>

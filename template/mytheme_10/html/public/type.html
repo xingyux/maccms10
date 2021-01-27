@@ -1,0 +1,117 @@
+<div id="type" class='weui-popup__container popup-bottom'>
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-panel">
+			<div class="weui-panel__hd">
+				<a class="tips pull-right close-popup" href="javascript:;">关闭</a>
+				选择类型
+			</div>
+			 <div class="weui-panel__bd">										
+				<div class="weui-media-box weui-media-box_appmsg">
+				    <div class="weui-media-box__bd">
+				      	<ul class="stui-type__item clearfix">
+				      		{if condition="$obj.type_pid eq 0"}
+				      			{maccms:type parent="'.$obj['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+								<li><a href="{:mac_url_type($vo2,[],'show')}">{$vo2.type_name}</a></li>
+						    	{/maccms:type}			
+						    {else /}
+						    	{maccms:type parent="'.$obj['type_pid'].'" order="asc" by="sort" id="vo2" key="key2"}
+						    	<li><a href="{:mac_url_type($vo2,[],'show')}">{$vo2.type_name}</a></li>
+						    	{/maccms:type}	
+						    {/if}
+						</ul>
+						<!--<ul class="stui-type__item clearfix">
+							{empty name="$obj.type_extend.class"}
+						        {maccms:foreach name=":explode(',',$obj.parent.type_extend.class)"}
+						        <li><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {else /}
+						        {maccms:foreach name=":explode(',',$obj.type_extend.class)"}
+						       	<li><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {/empty}	
+						</ul>-->
+				    </div>		    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="area" class='weui-popup__container popup-bottom'>
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-panel">
+			<div class="weui-panel__hd">
+				<a class="tips pull-right close-popup" href="javascript:;">关闭</a>
+				选择地区
+			</div>
+			 <div class="weui-panel__bd">										
+				<div class="weui-media-box weui-media-box_appmsg">
+				    <div class="weui-media-box__bd">
+				      	<ul class="stui-type__item clearfix">
+							{empty name="$obj.type_extend.area"}
+						        {maccms:foreach name=":explode(',',$obj.parent.type_extend.area)"}
+						        <li><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {else /}
+						        {maccms:foreach name=":explode(',',$obj.type_extend.area)"}
+						        <li><a href="{:mac_url_type($obj,['area'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {/empty}
+						</ul>
+				    </div>		    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="year" class='weui-popup__container popup-bottom'>
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-panel">
+			<div class="weui-panel__hd">
+				<a class="tips pull-right close-popup" href="javascript:;">关闭</a>
+				选择年份
+			</div>
+			 <div class="weui-panel__bd">										
+				<div class="weui-media-box weui-media-box_appmsg">
+				    <div class="weui-media-box__bd">
+				      	<ul class="stui-type__item clearfix">
+							{empty name="$obj.type_extend.year"}
+						        {maccms:foreach name=":explode(',',$obj.parent.type_extend.year)"}
+						        <li><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {else /}
+						        {maccms:foreach name=":explode(',',$obj.type_extend.year)"}
+						        <li><a href="{:mac_url_type($obj,['year'=>$vo],'show')}">{$vo}</a></li>
+						        {/maccms:foreach}
+						    {/empty}	
+						</ul>
+				    </div>		    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="list" class='weui-popup__container popup-bottom'>
+	<div class="weui-popup__overlay"></div>
+	<div class="weui-popup__modal">
+		<div class="weui-panel">
+			<div class="weui-panel__hd">
+				<a class="tips pull-right close-popup" href="javascript:;">关闭</a>
+				选择排序
+			</div>
+			 <div class="weui-panel__bd">										
+				<div class="weui-media-box weui-media-box_appmsg">
+				    <div class="weui-media-box__bd">
+				      	<ul class="stui-type__item active clearfix">
+							<li class="active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">按时间</a></li>
+							<li><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}">按人气</a></li>
+							<li><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}">按评分</a></li>
+						</ul>
+				    </div>		    
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div class="weui-cells__tips font-12 text-center" style="padding-top: 5px;">&larr; 左右滑动可切换来源哦  &rarr;</div>
+<div class="weui-panel weui-panel_access">
+	<div class="swiper-playlist swiper-container">
+    	<div class="swiper-wrapper">
+    		{maccms:foreach name="obj.vod_play_list" id="vo"}
+    		<div class="swiper-slide">    		
+			    <div class="weui-panel__hd">
+			    	<span class="tips pull-right">{$vo.player_info.tip}</span>
+			    	{$vo.player_info.show}
+			    </div>
+	   			<div class="weui-panel__bd">
+		      		<div class="weui-media-box weui-media-box_text">      		
+			        	<ul class="stui-playlist clearfix">
+							{maccms:foreach name="vo.urls" id="vo2"}
+				            <li {if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}class="active"{/if}><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+				            {/maccms:foreach}	
+						</ul>
+		      		</div>  		      		
+		      	</div>
+	    	</div>	    
+			{/maccms:foreach}
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+	var swiper = new Swiper('.swiper-playlist');
+	var num = parseInt({$param.sid}) -1;	
+	swiper.slideTo(num, 1000, false);
+</script>
+	

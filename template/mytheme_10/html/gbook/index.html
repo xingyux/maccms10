@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>留言板 - {$maccms.site_name}</title>
+    {include file="public/include"}
+    <script>
+        $(function(){
+            MAC.Gbook.Login = {$gbook.login};
+            MAC.Gbook.Verify = {$gbook.verify};
+            MAC.Gbook.Init();
+        });
+    </script>
+</head>
+<body>
+{include file="public/head"}
+<header class="stui-header">
+    <span class="stui-header__left"><a href="javascript:MAC.GoBack()"><i class="iconfont icon-left"></i>返回</a></span>
+    <span class="stui-header__center">留言板</span>
+    <span class="stui-header__right"><a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a></span>
+</header>
+<form class="gbook_form">
+	<div class="weui-cells weui-cells_form" style="margin-top: -1px;">
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<textarea class="weui-textarea gbook_content" name="gbook_content" placeholder="请输入留言内容" rows="5"></textarea>
+			</div>
+		</div>	
+		{if condition="$gbook.verify eq 1"}	
+		<div class="weui-cell weui-cell_vcode">
+	        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" name="verify" placeholder="输入验证码">
+	        </div>
+	        <div class="weui-cell__ft">
+	        	<img class="weui-vcode-img" id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'+Math.random()" />
+	        </div>
+	    </div>
+		{/if}
+	</div>	
+	<div class="weui-btn-area">
+		<input type="button" class="gbook_submit weui-btn weui-btn_primary" value="提交留言">
+	</div>
+</form>
+<div class="weui-panel weui-panel_access" style="">
+	<div class="weui-cells__title">网友留言</div>
+	{maccms:gbook num="10" paging="yes" order="desc" by="id"}
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd" style="width: 35px; height: 35px;">
+      		<img class="weui-media-box__thumb" src="__STATIC__/images/home/duface.png">
+    	</div>
+		<div class="weui-media-box__bd">
+            <h4 class="weui-media-box__title font-14" style="overflow: visible;">
+				<span class="text-999 font-12 pull-right">{$vo.gbook_ip|mac_long2ip}</span>
+				{$vo.gbook_name}
+			</h4>
+			<p class="weui-media-box__desc">{$vo.gbook_time|mac_friend_date}</p>
+			<p class="font-14">{$vo.gbook_content}</p>
+			{if condition="$vo.gbook_reply_time gt 0"}
+			<p class="font-12 text-red">
+				管理员回复：{$vo.gbook_reply}
+			</p>
+			{/if}
+			
+		</div>
+	</div>
+	{/maccms:gbook}
+</div>
+{include file="public/paging"}
+{include file="public/foot"}
+<style type="text/css">.weui-media-box_appmsg{-webkit-box-align: stretch; -webkit-align-items: stretch; align-items: stretch;}</style>
+</body>
+</html>

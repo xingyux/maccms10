@@ -1,0 +1,36 @@
+	
+<div class="stui-pannel stui-top-menu clearfix">
+	<div class="stui-pannel__head clearfix">
+		<h3 class="title">
+			目录
+		</h3>						
+	</div>	
+	<ul class="stui-pannel__menu clearfix">	  		
+		{maccms:type order="asc" by="sort" ids="child" flag="vod"}
+        <li {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}class="active"{/if}>
+        	<a href="{:mac_url_type($vo)}">
+        		<span class="count pull-right">{:mac_data_count($vo.type_id,'all')}</span>
+        		{$vo.type_name}
+        	</a>
+        </li>
+        {/maccms:type}
+	</ul>	
+	<div class="hidden-xs" style="margin-top: 10px;">
+		<a target="_blank" href=""><img class="img-responsive" src="http://v.shoutu.cn/html/video/img/ad4.jpg" /></a>
+	</div>
+	
+</div>
+
+<script type="text/javascript">
+	if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){
+		$(window).scroll(function(){		
+			if($(window).scrollTop()<180){
+				$(".stui-top-menu").removeClass("floatTop").removeClass("floatBottom");
+			}else if($(window).scrollTop()>=$(document).height()-$(window).height()-180){
+				$(".stui-top-menu").removeClass("floatTop").addClass("floatBottom");	
+			}else{
+				$(".stui-top-menu").removeClass("floatBottom").addClass("floatTop")	
+			}
+		});
+	}
+</script>

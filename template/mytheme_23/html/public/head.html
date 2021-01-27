@@ -1,0 +1,14 @@
+<div class="weui-search-bar" style="display: none;">
+    <form class="weui-search-bar__form" id="search" name="search" method="POST" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();">
+        <div class="weui-search-bar__box">
+          	<i class="weui-icon-search"></i>
+          	<input type="text" id="wd" name="wd" class="weui-search-bar__input" placeholder="搜索">
+          	<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+          	<i class="weui-icon-search"></i>
+          	<span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>

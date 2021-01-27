@@ -1,0 +1,47 @@
+
+<div class="weui-footer" style="padding: 20px 0;">
+    <p class="weui-footer__links">
+      <a href="/" class="weui-footer__link">返回首页</a>
+      <a href="javascript:scroll(0,0)" class="weui-footer__link">返回顶部</a>
+    </p>
+    <p class="weui-footer__text">Copyright © 2019 MYTHEHE.CN</p>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$(".open-search").click(function(){
+			$(".weui-search-bar").show();
+			$(".weui-search-bar").addClass("weui-search-bar_focusing").find(".weui-search-bar__input").focus();	
+			$(".myui-header").hide();
+		});
+		$("#searchCancel").click(function(){
+			$(".weui-search-bar").removeClass("weui-search-bar_focusing").hide();
+			$(".myui-header").show();
+		});
+		$(".weui-popup__overlay").click(function(){
+			$(".weui-popup__container").removeClass("weui-popup__container--visible").hide();
+		});
+		$(".header-menu").click(function(){
+			$(".header-menu .down").toggle();
+		});	
+		$(".list-more").click(function(){
+			var $that = $(this);
+			$.ajax({
+				type: "get",
+				url: '{$maccms.path}index.php/ajax/data.html?mid='+$that.attr("data-mid")+'&page='+$that.attr("data-page")+'&limit=10&tid='+$that.attr("data-tid")+'',
+				dataType: "json",
+				success: function(data) {
+					var _str="";
+					$.each(data.list,function(i,e){
+						_str+='<div class="weui-media-box weui-media-box_appmsg"><a class="weui-media-box__hd" href="/index.php/vod/play/id/'+e.vod_id+'/sid/1/nid/1.html"><span class="list-thumb" style="background: url('+e.vod_pic+') no-repeat; background-position: 50% 50%; background-size: cover;"></span><i class="i-play"></i></a><a class="weui-media-box__bd" href="/index.php/vod/play/id/'+e.vod_id+'/sid/1/nid/1.html"><h4 class="weui-media-box__title">'+e.vod_name+'</h4><p class="weui-media-box__desc">类型：'+e.vod_class+'</p><p class="weui-media-box__desc">状态：<span class="remarks">'+e.vod_remarks+'</span></p><p class="weui-media-box__desc">导演：'+e.vod_director+'</p><p class="weui-media-box__desc">主演：'+e.vod_actor+'</p><p class="weui-media-box__desc">上映：'+e.vod_year+'</p></a><div class="weui-media__ft"><i class="iconfont icon-right"></i></div></div>'
+					});
+					$('#list').append(_str);		           	
+				}
+			});				
+			$(this).attr("data-page", parseInt($(this).attr("data-page")) + 1);
+			if ($(this).attr("data-page") == '20') {
+			   $(this).hide();
+			   $(".weui-btn-area").append("<p class='text-center text-999'>我是有底线的</p>");
+			}
+		});
+	});
+</script>

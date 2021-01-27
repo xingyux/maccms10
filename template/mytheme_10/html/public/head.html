@@ -1,0 +1,43 @@
+
+<div class="weui-search-bar" style="display: none;">
+    <form class="weui-search-bar__form" id="search" name="search" method="POST" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();">
+        <div class="weui-search-bar__box">
+          	<i class="weui-icon-search"></i>
+          	<input type="text" id="wd" name="wd" class="weui-search-bar__input" placeholder="搜索">
+          	<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+          	<i class="weui-icon-search"></i>
+          	<span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>
+<div class="weui-tabbar">
+    <a href="{$maccms.path}" class="weui-tabbar__item">
+      	<div class="weui-tabbar__icon">
+        	<img src="/statics/mobile/icon/icon_0{if condition="$maccms.aid eq 1"}_on{/if}.png" alt="">
+      	</div>
+      	<p class="weui-tabbar__label">首页</p>
+    </a>
+    {maccms:type num="10" order="asc" by="sort" ids="1,2,3"}
+    <a href="{:mac_url_type($vo)}" class="weui-tabbar__item">
+      	<div class="weui-tabbar__icon">
+        	<img src="/statics/mobile/icon/icon_{$vo.type_id}{if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}_on{/if}.png" alt="">
+      	</div>
+      	<p class="weui-tabbar__label">{$vo.type_name}</p>
+    </a>
+    {/maccms:type}
+    <a href="{:mac_url_topic_index()}" class="weui-tabbar__item">
+      	<div class="weui-tabbar__icon">
+        	<img src="/statics/mobile/icon/icon_5{if condition="$maccms.aid eq 30"}_on{/if}.png" alt="">
+      	</div>
+      	<p class="weui-tabbar__label">专题</p>
+    </a>
+    <!--<a href="{:mac_url('user/index')}" class="weui-tabbar__item">
+      	<div class="weui-tabbar__icon">
+        	<img src="/statics/mobile/icon/icon_7.png" alt="">
+      	</div>
+      	<p class="weui-tabbar__label">我的</p>
+    </a>-->
+</div>

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+    <meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍" />
+    {include file="public/include"}
+</head>
+<body>
+<header class="myui-header">
+    <span class="myui-header__left"><a href="javascript:MAC.GoBack();">返回</a>&nbsp;&nbsp;<a href="/">首页</a></span>
+    <span class="myui-header__center">在线播放</span>
+    <span class="myui-header__right">
+    	<a class="open-search" href="javascript:;"><i class="weui-icon-search"></i></a>
+    </span>
+</header>
+{include file="public/head"}
+<div class="page__bd">	
+	<div class="weui-panel">
+		<div class="myui-player embed-responsive clearfix" style="background-color: #000;">
+			{$player_data}{$player_js}
+		</div>
+		<div class="weui-media-box weui-media-box_appmsg">
+		    <div class="weui-media-box__bd">
+		      	<div class="weui-media-box__title">
+		      		正在播放-{$obj.vod_name}
+		      	</div>
+		    </div>		    
+		</div>
+	</div>
+	
+	{maccms:foreach name="obj.vod_play_list" id="vo"}
+	<div class="weui-panel weui-panel_access">   		
+	    <div class="weui-panel__hd">
+	    	<span class="tips pull-right">{$vo.player_info.tip}</span>
+	    	{$vo.player_info.show}
+	    </div>
+		<div class="weui-panel__bd">
+	  		<div class="weui-media-box weui-media-box_text">      		
+	        	<ul class="myui-playlist type-slide clearfix">
+					{maccms:foreach name="vo.urls" id="vo2"}
+		            <li {if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}class="active"{/if}><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+		            {/maccms:foreach}	
+				</ul>
+	  		</div>  		      		
+	    </div>
+	</div>
+	{/maccms:foreach}
+
+	<div class="weui-panel weui-panel_access">
+	    <div class="weui-panel__hd">
+	    	同类型
+	    </div>
+	    <div class="weui-panel__bd">
+	    	{maccms:vod num="5" type="current" order="desc" by="hits"}
+	      	<div class="weui-media-box weui-media-box_appmsg">
+	      	    <a class="weui-media-box__hd" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}">
+	      	      	<span class="list-thumb" style="background: url({:mac_url_img($vo.vod_pic)});"></span>
+	      	      	<i class="i-play"></i>
+	      	    </a>
+	      	   <a class="weui-media-box__bd" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}">
+	      	     	<h4 class="weui-media-box__title">{$vo.vod_name|mac_substring=10}</h4>
+	      	     	<p class="weui-media-box__desc">状态：<span class="remarks">{if condition="$vo.vod_remarks neq ''"}{$vo.vod_remarks}{elseif condition="$vo.vod_serial gt 0"}第{$vo.vod_serial}集{else /}已完结{/if}</span></p>
+					<p class="weui-media-box__desc">类型：{$vo.vod_class}</p>
+	      	     	<p class="weui-media-box__desc">导演：{$vo.vod_director|mac_default='内详'|mac_filter_html}</p>
+	      	     	<p class="weui-media-box__desc">主演：{$vo.vod_actor|mac_default='内详'|mac_filter_html}</p>
+					<p class="weui-media-box__desc">上映：{$vo.vod_year|mac_default='内详'}</p>
+	      	   </a>
+	      	    <div class="weui-media__ft"><i class="iconfont icon-right"></i></div>
+	      	</div>
+	      	{/maccms:vod}
+	    </div>
+	    <div class="weui-panel__ft">
+	      	<a href="{:mac_url_type($obj)}" class="weui-cell weui-cell_access weui-cell_link">
+	        	<div class="weui-cell__bd">查看更多</div>
+	        	<span class="weui-cell__ft"></span>
+	      	</a>    
+	    </div>
+	</div>
+</div>
+{include file="public/foot"}
+<script type="text/javascript">
+	$(".MacPlayer").addClass("embed-responsive").css({"padding-bottom":"56.25%","z-index":"99"});
+	$("#playleft,.dplayer-video-wrap").css({"position":"inherit","overflow":"initial"});
+</script>
+<span class="mac_hits hits" style="display: none;" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-type="hits"></span>
+</body>
+</html>

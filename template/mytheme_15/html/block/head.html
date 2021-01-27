@@ -1,0 +1,42 @@
+<header class="stui-header__top clearfix">
+	<div class="container">	
+		<div class="row">
+			<div class="stui-header_hd clearfix">	
+				<div class="stui-header__user">
+					{if condition="$maccms.user_status eq 1"}
+					<a href="{:mac_url('user/index')}"><i class="icon iconfont icon-account"></i></a>
+					{else /}
+					<a class="open-popup" href="javascript:;"><i class="icon iconfont icon-clock"></i></a>
+					{/if}
+				</div>	
+				<div class="stui-header__search"> 
+			        <form id="search" name="search" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();">
+    					<input type="text" id="wd" name="wd" class="mac_wd form-control" value="{$param.wd}" placeholder="请输入关键词..."/>
+						<button class="submit" id="searchbutton" type="submit" name="submit"><i class="icon iconfont icon-search"></i></button>							
+					</form>
+			    </div>
+			    <div class="stui-header__logo">
+					<a class="logo" href="{$maccms.path}"></a>										  
+				</div>																			
+			</div>
+			<ul class="stui-header__menu type-slide">
+				<li {if condition="$maccms.aid eq 1"}class="active"{/if}><a href="{$maccms.path}">首页</a></li>
+				{maccms:type num="10" order="asc" by="sort" ids="parent"}
+                <li {if condition="($vo.type_id eq MAC_TYPE_ID || $vo.type_id eq MAC_TYPE_PID)"}class="active"{/if}><a href="{:mac_url_type($vo)}">{$vo.type_name}</a></li>
+                {/maccms:type}
+                <li {if condition="$maccms.aid eq 30"}class="active"{/if}><a href="{:mac_url_topic_index()}">专题</a></li>
+			</ul>				
+		</div>	  							    
+	</div>
+</header>
+{if condition="$maccms.user_status neq 1"}
+<div class="popup clearfix">
+	<div class="popup-head">
+		<a href="javascript:;" class="close-popup text-muted pull-right">返回 <i class="icon iconfont icon-more"></i></a>
+		<h3 class="margin-0">观看记录 / <a class="historyclean text-red" href="">清空</a></h3>				
+	</div>
+	<div class="popup-body">		
+		<ul class="stui-history__list clearfix" id="stui_history"></ul>
+	</div>
+</div>
+{/if}

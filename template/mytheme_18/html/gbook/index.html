@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+    <title>留言板 - {$maccms.site_name}</title>
+    {include file="block/include"}
+    <script>
+        $(function(){
+            MAC.Gbook.Login = {$gbook.login};
+            MAC.Gbook.Verify = {$gbook.verify};
+            MAC.Gbook.Init();
+        });
+    </script>
+    <link href="{$maccms.path}static/css/home.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">  	
+		.form-control{ display:block; width:100%; height:30px; padding: 0 10px; font-size:12px; line-height: 25px; border-radius:4px; transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s; border: 0; background-color: #f5f5f5; color: #999;}
+		textarea.form-control{ height: auto;}
+    	.btn{ display: inline-block; border: 0; padding: 8px 35px; font-size: 12px; border-radius: 5px; cursor: pointer;}
+		.btn-default{ background-color: #f5f5f5; color: #333;}
+		.btn-primary{ background-color: #1C86EE; color: #fff;}
+    </style>
+</head>
+<body>
+{include file="block/head"} 
+<div class="container">
+    <div class="row">
+ 		<div class="stui-pannel clearfix"> 
+			<div class="stui-pannel__head clearfix">
+				<h3 class="title">
+					我要留言
+				</h3>						
+			</div>																		
+ 			<div class="col-pd clearfix">
+ 				<form class="gbook_form">   	     					
+	 				<div class="stui-gbook__form">	
+						<p>
+							<textarea class="form-control" name="gbook_content" rows="3"></textarea>
+						</p>						
+						<p class="margin-0">
+							<span class="pull-right">
+								<input type="reset" value="重新留言" class="btn btn-default" /> &nbsp; <input class="btn btn-primary gbook_submit"type="button" value="提交" >
+							</span>							
+							{if condition="$gbook.verify eq 1"}
+							<img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" height="30" /> &nbsp;
+							<input type="text" name="verify" class="form-control" placeholder="验证码" style="width: 80px; display: inline-block;">
+							{/if}
+						</p>
+	 				</div>
+ 				</form>
+ 			</div>
+	    </div>			
+    	<div class="stui-pannel clearfix">
+    		<div class="stui-pannel__head clearfix">
+				<h3 class="title">
+					网友留言
+				</h3>						
+			</div>	
+    		<div class="col-pd clearfix">
+				{maccms:gbook num="10" paging="yes" order="desc" by="id"}
+				<div class="stui-gbook__list clearfix" style="padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #eee; border-radius: 5px;">
+					<p class="con">{$vo.gbook_name}：<span class="text-muted font-12">{$vo.gbook_content}</span></p>
+					{if condition="$vo.gbook_reply_time gt 0"}
+					<p class="text-red">管理员回复：{$vo.gbook_reply}</p>
+					{/if}
+					<p class="text-muted margin-0">{$vo.gbook_time|date='Y-m-d H:i:s',###}</p>													
+				</div>  
+				{/maccms:gbook}	
+				{include file="block/page"}
+			</div>
+    	</div>
+			
+    	
+
+    </div>
+</div>
+
+{include file="block/foot"}
+</body>
+</html>

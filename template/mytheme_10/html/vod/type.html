@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{$obj.type_title} - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$obj.type_key}" />
+    <meta name="description" content="{$obj.type_des}" />
+    {include file="public/include"}
+</head>
+<body>
+{include file="public/head"}
+<header class="stui-header">
+    <span class="stui-header__left"><a href="javascript:MAC.GoBack()"><i class="iconfont icon-left"></i>返回</a></span>
+    <span class="stui-header__center">{$obj.type_name}</span>    
+    <span class="stui-header__right">
+    	<a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a>   	
+    </span>
+</header>
+<div class="page__bd">	
+   	<div class="weui-panel weui-panel_access">
+   		<div class="weui-tab">
+	      	<div class="weui-navbar" style="position: relative;">
+	       		<a class="weui-navbar__item weui-bar__item--on open-popup" href="javascript:;" data-target="#type">类型 <i class="iconfont icon-arrowdown text-ccc"></i></a>
+	       		<a class="weui-navbar__item weui-bar__item--on open-popup" href="javascript:;" data-target="#area">地区 <i class="iconfont icon-arrowdown text-ccc"></i></a>
+	       		<a class="weui-navbar__item weui-bar__item--on open-popup" href="javascript:;" data-target="#year">年份 <i class="iconfont icon-arrowdown text-ccc"></i></a>
+	       		<a class="weui-navbar__item weui-bar__item--on open-popup" href="javascript:;" data-target="#list">排序 <i class="iconfont icon-sort text-ccc"></i></a>
+	      	</div>
+	    </div>		    	    
+        <div class="weui-panel__bd">
+        	{maccms:vod num="10" paging="yes" type="activerent" order="desc" by="time"}
+          	{include file="public/vod_box"}
+          	{/maccms:vod}
+        </div>
+    </div>   
+    {include file="public/paging"}
+</div>
+{include file="public/type"}
+{include file="public/foot"}
+</body>
+</html>

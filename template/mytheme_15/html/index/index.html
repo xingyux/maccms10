@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="seo/index"}   
+	{include file="block/include"}
+</head>
+<body>
+	{include file="block/head"}
+    <div class="container">
+        <div class="row">
+        	<!-- 幻灯 -->
+        	<div class="stui-pannel clearfix">
+				<div class="stui-pannel-box clearfix">
+					<div class="stui-pannel_hd clearfix">	
+						<div class="flickity-item">
+							{maccms:vod num="10" type="all" order="desc" by="time" level="5"}
+							<div class="box">
+								<a href="{:mac_url_vod_detail($vo)}" class="stui-vodlist__thumb" title="{$vo.vod_name}" style="background: url({:mac_url_img($vo.vod_pic_slide)}) no-repeat; background-position:50% 50%; background-size: cover; padding-top: 55%;">	
+									<span class="pic-text text-center">{$vo.vod_name}</span>
+								</a>	            					
+							</div>	
+							{/maccms:vod}	
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end 幻灯 -->
+			
+			<!-- 推荐列表 -->
+			<div class="stui-pannel clearfix">
+				<div class="stui-pannel-box clearfix">
+					<div class="stui-pannel_bd clearfix">																						
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="12" type="all" order="desc" by="time" level="4"}							
+							{include file="block/vod_box"}																		
+							{/maccms:vod}	
+						</ul>				
+					</div>
+				</div>
+			</div>
+			<!-- end 推荐列表 -->
+			
+			<!-- end 分类列表 -->
+			{maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
+			<div class="stui-pannel clearfix">
+				<div class="stui-pannel-box clearfix">
+					<div class="stui-pannel_hd">
+						<div class="stui-pannel__head clearfix">
+							<a class="more text-muted pull-right" href="{:mac_url_type($vo1,[],'show')}">更多 <i class="icon iconfont icon-more"></i></a>
+							<h3 class="title">
+								{$vo1.type_name}
+							</h3>							
+						</div>																		
+					</div>
+					<div class="stui-pannel_bd clearfix">																						
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="6" type="'.$vo1['type_id'].'" order="desc" by="time"}							
+							{include file="block/vod_box"}																		
+							{/maccms:vod}	
+						</ul>				
+					</div>
+				</div>
+			</div>
+			{/maccms:type}
+			<!-- end 分类列表 -->
+			
+        </div>
+    </div>
+	{include file="block/foot"}
+</body>
+</html>

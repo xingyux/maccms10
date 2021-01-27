@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果" />
+    <meta name="description" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果" />
+    {include file="public/include"}
+</head>
+<body>
+<header class="stui-header">
+    <span class="stui-header__left"><a href="javascript:MAC.GoBack()"><i class="iconfont icon-left"></i> 返回</a></span>
+    <span class="stui-header__center">{$param.wd}</span>
+    <span class="stui-header__right"><a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a></span>
+</header>
+{include file="public/head"}
+<div class="page__bd">
+   	<div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+        	{maccms:vod num="10" paging="yes" pageurl="vod/search" order="desc" by="time"}
+          	{include file="public/vod_box"}
+          	{/maccms:vod}
+        </div>
+   </div>
+   {if condition="$__PAGING__.record_total eq 0"} 
+    <div class="stui-tips-empty">
+		<i class="iconfont icon-sad"></i>
+		<p class="text">没有相关影片哦</p>
+	</div>
+	{/if}
+</div>
+{include file="public/paging"}
+{include file="public/foot"}
+</body>
+</html>
+

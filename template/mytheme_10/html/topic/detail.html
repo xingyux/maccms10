@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{$obj.topic_name}专题详情- {$maccms.site_name}</title>
+    <meta name="keywords" content="{$obj.topic_name}电影专题,{$obj.topic_name}电视剧专题,{$obj.topic_name}综艺专题,{$obj.topic_name}动漫专题,{$obj.topic_name}推荐专题" />
+    <meta name="description" content="本站提供{$obj.topic_name},最新最全精品专题数据" />
+    {include file="public/include"}
+</head>
+<body>
+{include file="public/head"}
+<header class="stui-header">
+    <span class="stui-header__left"><a href="javascript:MAC.GoBack()"><i class="iconfont icon-left"></i>返回</a></span>
+    <span class="stui-header__center">专题</span>    
+    <span class="stui-header__right">
+    	<a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a>   	
+    </span>
+</header>
+<div class="page__bd">
+	<div class="weui-panel weui-panel_access">
+		<div class="weui-media-box__hd">
+			<img class="img-responsive" src="{$obj.topic_pic}" alt="{$obj.topic_name}" />
+		</div>
+		<div class="weui-panel__bd">
+			<div class="weui-media-box weui-media-box_appmsg">				
+				<div class="weui-media-box__bd">
+					<h4 class="weui-media-box__title">{$obj.topic_name}</h4>
+					<p class="text-666" style="margin-top: 10px; font-size: 13px;"><span class="desc-brief">{$obj.topic_content|mac_filter_html|mac_substring=90}...</span><span class="desc" style="display: none;">{$obj.topic_content|mac_filter_html}</span><span class="desc-more">展开 &gt;</span></p>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<div class="weui-panel weui-panel_access"> 
+		<div class="weui-panel__hd">专题影片</div>
+		<div class="weui-panel__bd">
+        	{maccms:foreach name="$obj.vod_list"}
+          	{include file="public/vod_box"}
+          	{/maccms:foreach}
+  		</div>
+	</div>
+</div>
+{include file="public/foot"}
+<script type="text/javascript">
+	$(".desc-more").click(function(){
+		$(".desc").show();
+		$(".desc-brief").hide();
+		$(this).hide();
+	})
+</script>
+</body>
+</html>
+

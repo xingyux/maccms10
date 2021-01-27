@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+		<div class="stui-header__top clearfix">
+			<div class=" clearfix">
+				<a class="stui-header__nav" href="javascript:;">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
+				<div class="stui-header__search"> 
+					 <form id="search" name="search" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();">
+						<input type="text" id="wd" name="wd" class="mac_wd form-control" value="{$param.wd}" placeholder="请输入关键词..."/>
+						<button class="submit" id="searchbutton" type="submit" name="submit"></button>							
+					</form>
+				</div>
+				<div class="stui-header__logo">
+					<a class="logo" href="{$maccms.path}"></a>										  
+				</div>
+				
+			</div>											
+			<ul class="stui-header__menu clearfix">	  		
+				<li {if condition="$maccms.aid eq 1"}class="active"{/if}><a href="{$maccms.path}">首页</a></li>
+				{maccms:type order="asc" by="sort" ids="parent"}
+		        <li {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}class="active"{/if}>
+		        	<a href="{:mac_url_type($vo)}">{$vo.type_name}</a>
+		        </li>
+		        {/maccms:type}
+			</ul>
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(".stui-header__nav").click(function() {
+		var display = $(".stui-warp-head").css('display');
+  		if(display == 'block'){
+  			$(".stui-warp-head").hide(); 
+  			$(".stui-warp-content").addClass("active");
+		}else{
+			$(".stui-warp-head").show();  
+			$(".stui-warp-content").removeClass("active");
+		}
+	});
+</script>
+

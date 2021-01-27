@@ -1,0 +1,16 @@
+<div class="stui-foot clearfix">
+	{if condition="$maccms.aid eq 1"}
+	<p class="hidden-xs">
+		<span class="text-muted">友情链接：</span>
+		{maccms:link num="30" type="font"}
+		<a class="text-muted" href="{$vo.link_url}" title="{$vo.link_name}" target="_blank">{$vo.link_name}</a>&nbsp;&nbsp;&nbsp;							
+		{/maccms:link}
+	</p>
+	{/if}
+	<p class="hidden-xs">
+		<a href="">帮助中心</a><span class="split-line"></span><a href="{:mac_url('gbook/index')}">留言求片</a><span class="split-line"></span><a href="">版权声明</a>
+	</p>
+	<div class="hidden-xs">Copyright © 2011-2018 maccms [苹果电影程序]版权所有</div>						
+	<p class="text-muted visible-xs">Copyright © 2008-2018</p>
+</div>
+<div class="hide">{$maccms.site_tj}</div>

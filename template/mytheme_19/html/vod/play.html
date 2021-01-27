@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="seo/vod_play"}   
+	{include file="block/include"}
+</head>
+<body>
+	{include file="block/head"}
+    <div class="container">
+        <div class="row">
+        	<div class="stui-warp-head">
+        		{include file="block/menu"}<!-- 小分类 -->						
+        	</div>
+        	<div class="stui-warp-content">  	       	
+				<!-- 播放器  -->
+				<div class="stui-pannel clearfix">		
+					<div class="stui-pannel__head clearfix">
+						<h3 class="title">
+							{$obj.vod_name}
+						</h3>						
+					</div>
+					<div class="stui-pannel-bd">
+						<div class="stui-player__video clearfix">
+							{$player_data}{$player_js}							
+						</div>	
+						<div class="stui-player__foot"><span class="pull-right"><span class="text-red">{$obj.vod_hits}</span> 次播放</span>时间：{$obj.vod_time|date='Y-m-d h:m:s',###}</div>
+					</div>									
+				</div>	
+				<!-- end 播放器  -->
+				
+				<div class="stui-pannel clearfix">
+					<div class="stui-pannel__head clearfix">
+						<h3 class="title">
+							相关视频
+						</h3>						
+					</div>																		
+					<div class="stui-pannel-bd">
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="10" type="current" order="desc" by="time"}
+							<li>
+								{include file="block/vod_box"}														
+							</li>			
+							{/maccms:vod}
+						</ul>			
+					</div>			
+				</div>						
+			</div>
+        </div>
+    </div>
+	<script type="text/javascript">
+		$(".MacPlayer").addClass("embed-responsive embed-responsive-16by9").css({"padding-bottom":"56.25%","z-index":"99"});
+	</script>
+    <span class="mac_hits hits hide" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-type="hits"></span>
+	{include file="block/foot"}
+</body>
+</html>

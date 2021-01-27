@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果" />
+    <meta name="description" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}搜索结果" />
+    {include file="public/include"}
+</head>
+<body>
+<header class="myui-header">
+    <span class="myui-header__left"><a href="javascript:MAC.GoBack()">返回</a>&nbsp;&nbsp;<a href="/">首页</a></span>
+    <span class="myui-header__center">{$param.wd}</span>
+    <span class="myui-header__right"><a class="open-search" href="javascript:;"><i class="weui-icon-search"></i></a></span>
+</header>
+{include file="public/head"}
+<div class="page__bd">
+   	<div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+        	{maccms:vod num="10" paging="yes" pageurl="vod/search" order="desc" by="time"}
+          	<div class="weui-media-box weui-media-box_appmsg">
+          	    <a class="weui-media-box__hd" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}">
+          	      	<span class="list-thumb" style="background: url({:mac_url_img($vo.vod_pic)});"></span>
+          	      	<i class="i-play"></i>
+          	    </a>
+				<a class="weui-media-box__bd" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}">
+          	     	<h4 class="weui-media-box__title">{$vo.vod_name|mac_substring=10}</h4>
+          	     	<p class="weui-media-box__desc">状态：<span class="remarks">{if condition="$vo.vod_remarks neq ''"}{$vo.vod_remarks}{elseif condition="$vo.vod_serial gt 0"}第{$vo.vod_serial}集{else /}已完结{/if}</span></p>
+					<p class="weui-media-box__desc">类型：{$vo.vod_class}</p>
+          	     	<p class="weui-media-box__desc">导演：{$vo.vod_director|mac_default='内详'|mac_filter_html}</p>
+          	     	<p class="weui-media-box__desc">主演：{$vo.vod_actor|mac_default='内详'|mac_filter_html}</p>
+					<p class="weui-media-box__desc">上映：{$vo.vod_year|mac_default='内详'}</p>  	
+          	   </a>
+          	    <div class="weui-media__ft"><i class="iconfont icon-right"></i></div>
+          	</div>
+          	{/maccms:vod}
+        </div>
+   </div>
+   {include file="public/paging"}
+</div>
+{include file="public/foot"}
+</body>
+</html>
+

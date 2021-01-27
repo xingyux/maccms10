@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>{$maccms.site_name}</title>
+    <meta name="keywords" content="{$maccms.site_keywords}" />
+    <meta name="description" content="{$maccms.site_description}" />
+    {include file="public/include"}
+</head>
+<body>	
+	{include file="public/head"}
+	<header class="stui-header">
+	    <span class="stui-header__left"><a class="stui-header__logo" href="{$maccms.path}"></a></span>
+	    <span class="stui-header__center">&nbsp;</span>
+	    <span class="stui-header__right">
+	    	<a class="open-search" href="javascript:;"><i class="iconfont icon-search"></i></a>
+	    	<a href="{:mac_url('gbook/index')}" ><i class="iconfont icon-news"></i></a>
+	    </span>
+	</header>
+	<div class="page__bd">
+		{include file="index/banner"}    
+   		<div class="weui-panel weui-panel_access" style="margin-top: -1px;">
+   			<div class="weui-panel__hd">
+		    	<span class="pull-right stui-switch">
+		    		{maccms:type ids="1,2,3,4" order="asc" by="sort"}
+		    		<a {if condition="$vo.type_id eq 1"}class="active"{/if} href="javascript:;">{$vo.type_name}</a>
+		    		{/maccms:type}
+		    	</span>
+		    	热门推荐
+		    </div>
+    		<div class="swiper-index swiper-container">
+				<div class="swiper-wrapper">        	
+					{maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
+					<div class="swiper-slide">					  	
+    					<div class="weui-panel__bd">
+				        	{maccms:vod num="12" type="'.$vo1['type_id'].'" order="desc" by="time"}
+				          	{include file="public/vod_box"}
+				          	{/maccms:vod}
+		          		</div>
+		          		<div class="weui-panel__ft">
+				          	<a href="{:mac_url_type($vo1)}" class="weui-cell weui-cell_access weui-cell_link">
+				            	<div class="weui-cell__bd">查看更多{$vo1.type_name}</div>
+				            	<span class="weui-cell__ft"></span>
+				          	</a>    
+				        </div>	    			
+	          		</div>
+	          		{/maccms:type}	
+	          	</div>
+	        </div>
+	    </div>
+	    <div class="weui-panel weui-panel_access">
+		    <div class="weui-panel__hd">
+		    	<a class="tips pull-right" href="{:mac_url_topic_index()}">更多</a>
+		    	最新专题
+		    </div>
+		    <div class="weui-panel__bd">
+		   	 	<div class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__bd">
+		    			<div class="swiper-topic swiper-container">
+		    				<div class="swiper-wrapper">
+		    					{maccms:topic num="3" order="desc" by="sort" ids="all"}
+		    					<div class="swiper-slide"> 
+		    						<a href="{:mac_url_topic_detail($vo)}" title="{$vo.topic_name}">
+		    							<img class="img-responsive" src="{:mac_url_img($vo.topic_pic)}"/>
+		    						</a>
+					    			<p style="margin-top: 10px; text-align: center;"><a class="text-666" href="{:mac_url_topic_detail($vo)}" title="{$vo.topic_name}">{$vo.topic_name}</a></p>																		
+								</div>												
+								{/maccms:topic}
+							</div>
+					    </div>
+				    </div>				    
+				</div>
+			</div>
+		</div>
+	</div>
+	{include file="public/foot"}	
+	<script type="text/javascript">			
+	  	var tabsSwiper = new Swiper('.swiper-index',{
+		    speed:500,
+		    onSlideChangeStart: function(swiper){
+		      $(".stui-switch .active").removeClass('active')
+		      $(".stui-switch a").eq(swiper.activeIndex).addClass('active')  
+		    }
+	  	})
+	  	$(".stui-switch a").on('touchstart click',function(e){
+		    e.preventDefault()
+		    $(".stui-switch .active").removeClass('active')
+		    $(this).addClass('active')
+		    tabsSwiper.slideTo( $(this).index() )
+	  	})		
+	  	var swiper = new Swiper('.swiper-topic');
+	</script>
+	</body>
+</html>

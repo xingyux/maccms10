@@ -1,0 +1,97 @@
+
+<!-- 播放模块 -->
+{maccms:foreach name="obj.vod_play_list" id="vo"}		
+<div class="stui-pannel clearfix" id="playlist">
+	<div class="stui-pannel__head clearfix">
+		<span class="more text-muted pull-right hidden-xs">{$vo.player_info.tip}</span>
+		<h3 class="title">
+			播放类型：<!-- 播放器 -->{$vo.player_info.show}<!-- end 播放器 -->				
+		</h3>						
+	</div>																		
+	<ul class="stui-content__playlist clearfix">
+		<!-- 播放地址 -->	
+		{maccms:foreach name="vo.urls" id="vo2"}								
+        <li {if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}class="active"{/if}>
+        	<a class="text-muted pull-right" href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}正在{/if}播放 &gt;</a>
+        	
+        	<a href="javascript:;" class="copy_text"><!-- 播放集数 -->{$vo2.name}<!-- end 播放集数 --><span class="hidden-xs">$<!-- 播放集数地址 -->{$vo2.url}<!-- end 播放集数地址 --></span></a>
+        </li>
+        {/maccms:foreach}
+       	<!-- end 播放地址 -->
+	</ul>
+	<div class="stui-pannel__foot clearfix">
+		<span class="text-muted pull-right hidden-xs">tips：点击链接可以复制哦</span>
+		<a class="copy_checked text-red" href="javascript:;">复制全部</a>
+	</div>
+</div>
+{/maccms:foreach}
+<!-- end 播放模块 -->
+
+<!-- 下载模块 -->
+{maccms:foreach name="obj.vod_down_list" id="vo"}		
+<div class="stui-pannel clearfix" id="playlist">
+	<div class="stui-pannel__head clearfix">
+		<span class="more text-muted pull-right hidden-xs">{$vo.player_info.tip}</span>
+		<h3 class="title">
+			下载类型：<!-- end 下载器 -->{$vo.player_info.show}<!-- end 下载器 -->		
+		</h3>						
+	</div>																		
+	<ul class="stui-content__playlist clearfix">
+		<!-- 下载地址 -->	
+		{maccms:foreach name="vo.urls" id="vo2"}								
+        <li>
+        	<a href="javascript:;" class="copy_text"><!-- 下载集数 -->{$vo2.name}<!-- end 下载集数 --><span class="hidden-xs">$<!-- 下载集数地址 -->{$vo2.url}<!-- end 下载集数地址 --></span></a>
+        </li>
+        {/maccms:foreach}
+       	<!-- end 下载地址 -->
+	</ul>
+	<div class="stui-pannel__foot clearfix">
+		<span class="text-muted pull-right hidden-xs">tips：点击链接可以复制哦</span>
+		<input type="checkbox" name="checkall" checked> 全选 &nbsp; &nbsp;<a class="copy_checked text-red" href="javascript:;">复制全部</a>
+	</div>
+</div>
+{/maccms:foreach}
+<!-- end 下载模块 -->
+
+<script type="text/javascript" src="/statics/js/clipboard.min.js"></script>
+
+<script type="text/javascript">	
+	$(".copy_btn").each(function(){
+		var text1 = $(this).attr("data-text");		
+		var clipboard = new Clipboard(this, {
+			text: function() {									
+				return text1;
+			}
+		});
+		clipboard.on('success', function(e) {
+			alert("地址复制成功");
+		});
+	});
+	
+	$(".copy_text").each(function(){
+		var text2 = $(this).text();
+		var clipboard = new Clipboard(this, {
+			text: function() {									
+				return text2;
+			}
+		});
+		clipboard.on('success', function(e) {
+			alert("地址复制成功");
+		});
+	});
+	
+	$(".copy_checked").each(function(){		
+		var checked_url=[];						
+		$(this).parent().parent().find("li").find(".copy_text").each(function(){
+			checked_url.push($(this).text());
+		});	
+		var clipboard = new Clipboard(this, {
+			text: function() {				
+				return checked_url.join('\n');
+			}
+		});
+		clipboard.on('success', function(e) {
+			alert("地址复制成功");
+		});
+	});
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="seo/index"}   
+	{include file="block/include"}
+</head>
+<body>
+	{include file="block/head"}
+    <div class="container">
+        <div class="row">
+        	<div class="stui-warp-head">
+        		{include file="block/menu"}<!-- 小分类 -->						
+        	</div>
+        	<div class="stui-warp-content">
+        		<!-- 列表 -->
+				<div class="stui-pannel clearfix">
+					<div class="stui-pannel__head clearfix">
+						<h3 class="title">
+							热播视频
+						</h3>						
+					</div>	
+					<div class="stui-pannel-bd">
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="10" type="all" order="desc" by="hits"}
+							<li>
+								{include file="block/vod_box"}
+							</li>																						
+							{/maccms:vod}	
+						</ul>
+					</div>											
+				</div>
+				
+				<div class="stui-pannel clearfix">
+					<div class="stui-pannel__head clearfix">
+						<h3 class="title">
+							最近更新
+						</h3>						
+					</div>	
+					<div class="stui-pannel-bd">
+						<ul class="stui-vodlist clearfix">
+							{maccms:vod num="40" type="all" order="desc" by="time"}
+							<li>
+								{include file="block/vod_box"}	
+							</li>																						
+							{/maccms:vod}	
+						</ul>
+					</div>		
+				</div>
+				<!-- end 列表 -->
+				
+				<!-- 友链 -->
+				<div class="stui-pannel clearfix hidden-xs">				
+					<div class="stui-pannel__head clearfix">                                                                                                                                                                                                                                                       
+						<h3 class="title">								
+							友情链接
+						</h3>								
+					</div>																		
+					<div class="stui-pannel-bd">
+						<div style="padding: 0 10px;">
+							{maccms:link num="" type="font"}
+							<a class="text-muted" href="{$vo.link_url}" title="{$vo.link_name}" target="_blank">{$vo.link_name}</a>	&nbsp;&nbsp;					
+							{/maccms:link}
+						</div>
+						
+					</div>					
+				</div>
+				<!-- end 友链 -->
+        	</div>
+
+        </div>
+    </div>
+	{include file="block/foot"}
+</body>
+</html>

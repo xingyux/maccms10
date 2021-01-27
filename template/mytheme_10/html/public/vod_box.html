@@ -1,0 +1,13 @@
+<div class="weui-media-box weui-media-box_appmsg">
+    <a class="weui-media-box__hd" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}">
+      	<span class="list-thumb lazyload" data-original="{:mac_url_img($vo.vod_pic)}"></span>
+      	<i class="i-play"></i>
+    </a>
+    <a class="weui-media-box__bd" href="{:mac_url_vod_detail($vo)}">
+      	<h4 class="weui-media-box__title">{$vo.vod_name|mac_substring=16}<span class="iconscore">{$vo.vod_score}</span></h4>
+      	<p class="weui-media-box__desc">状态：<span class="remarks">{if condition="$vo.vod_remarks neq ''"}{$vo.vod_remarks}{elseif condition="$vo.vod_serial gt 0"}第{$vo.vod_serial}集{else /}已完结{/if}</span></p>
+      	<p class="weui-media-box__desc">导演：{$vo.vod_director|mac_default='内详'}</p>
+      	<p class="weui-media-box__desc">主演：{$vo.vod_actor|mac_default='内详'}</p>
+    </a>
+    <div class="weui-media__ft"><i class="iconfont icon-right"></i></div>
+</div>

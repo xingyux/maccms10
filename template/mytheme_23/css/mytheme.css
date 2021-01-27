@@ -1,0 +1,328 @@
+@charset "utf-8";
+/*!
+ * 版本：MYUI Copyright © 2019
+ * 作者：QQ726662013版权所有
+ * 官网：https://www.mytheme.cn
+ */
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+body {
+	position: relative;
+	max-width: 640px;
+	margin: 0 auto;
+	padding-top: 47px;
+	background-color: #f8f8f8;
+}
+
+ul, ol, li,dt,dd {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+:after,:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: " ";
+	clear: both;
+}
+
+.remarks {
+	color: red;
+}
+
+.pull-right {
+	float: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.i-play {
+	background: rgba(255,255,255,.8);
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+	margin: -10px 0 0 -10px;
+}
+
+.i-play,.i-play:after {
+	display: block;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	box-shadow: 0 0 black;
+}
+
+.i-play:after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-left: 5px solid #000;
+	border-bottom: 5px solid transparent;
+	margin: -5px 0 0 -2px;
+}
+
+.list-thumb {
+	display: block;
+	position: relative;
+	padding-top: 130%;
+	border-radius: 2px;
+	background-position: 50% 50% !important;
+	background-size: cover !important;
+}
+
+.list-thumb.active {
+	padding-top: 60%;
+	background: url(../img/load_w.gif) no-repeat;
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+.myui-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	background-color: #fff;
+	height: 48px;
+	line-height: 48px;
+}
+
+.myui-header:after {
+	content: " ";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-transform-origin: 0 100%;
+	transform-origin: 0 100%;
+	-webkit-transform: scaleY(0.5);
+	transform: scaleY(0.5);
+}
+
+.myui-header span {
+	display: block;
+	float: left;
+	width: 33.333333%;
+}
+
+.myui-header__center {
+	text-align: center;
+	font-weight: 400;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.myui-header__left {
+	padding-left: 15px;
+}
+
+.myui-header__right {
+	text-align: right;
+	padding-right: 15px;
+}
+
+.myui-header__right a {
+	margin-left: 10px;
+}
+
+.myui-header__right a .weui-icon-search {
+	margin-top: 15px;
+	font-size: 18px;
+	color: #999;
+}
+
+.header-menu {
+	display: inline-block;
+	position: relative;
+	margin-top: 17px;
+	padding-bottom: 10px;
+}
+
+.header-menu .span em {
+	display: block !important;
+	width: 20px;
+	height: 3px;
+	background-color: #999;
+	margin-bottom: 3px;
+}
+
+.header-menu .down {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: -5px;
+	z-index: 1;
+	width: 90px;
+	padding: 10px;
+	background-color: #fff;
+	box-shadow: 0 2px 3px rgba(0,0,0,.1);
+}
+
+.header-menu .down li {
+	text-align: center;
+	line-height: 30px;
+}
+
+.header-menu .down li a {
+	font-size: 15px;
+	color: #333;
+}
+
+.header-menu .down li.active a {
+	color: red;
+}
+
+.weui-search-bar {
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	background-color: #f8f8f8;
+}
+
+.weui-search-bar:before {
+	display: none;
+}
+
+.weui-panel__hd {
+	font-size: 17px;
+	font-weight: 400;
+	color: #333;
+}
+
+.weui-panel__hd .tips {
+	line-height: 25px;
+	font-size: 12px;
+	color: #999;
+}
+
+.weui-cell__bd,.weui-media-box__title {
+	color: #333;
+}
+
+.weui-media-box_appmsg .weui-media-box__hd {
+	position: relative;
+	width: 100px;
+	height: 130px;
+	line-height: 100px;
+	background-color: #f5f5f5;
+	overflow: hidden;
+	border-radius: 2px;
+}
+
+.weui-media-box__thumb {
+	border-radius: 2px;
+}
+
+.weui-media-box__desc {
+	line-height: 1.5;
+	-webkit-line-clamp: 1;
+}
+
+.embed-responsive {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	padding: 0;
+	height: 0;
+	padding-bottom: 56.25%
+}
+
+.embed-responsive iframe,.embed-responsive object,.embed-responsive video {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.myui-type__item {
+	position: relative;
+	width: 100%;
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch
+}
+
+.myui-type__item a {
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 15px;
+	color: #333;
+}
+
+.myui-type__item a.active {
+	font-size: 17px;
+	color: red;
+}
+
+.myui-playlist li,.myui-type__item li {
+	float: left;
+	width: 25%;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+.myui-playlist li a,.myui-type__item li a {
+	display: block;
+	padding: 5px;
+	text-align: center;
+	background-color: #f5f5f5;
+	font-size: 12px;
+	color: #666;
+	border-radius: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.myui-playlist li.active a,.myui-type__item li.active a {
+	background-color: #ccc000;
+	color: #fff;
+}
+
+.myui-page__item {
+	margin-top: 10px;
+}
+
+.myui-page__item li {
+	float: left;
+	width: 20%;
+	padding: 0 5px;
+	text-align: center;
+}
+
+.myui-page__item li a,.myui-page__item li span {
+	display: block;
+	padding: 5px;
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	background-color: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+}
