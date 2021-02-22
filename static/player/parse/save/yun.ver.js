@@ -1,1 +1,0 @@
-document.writeln("<font color=\'#ff0000\'>2020-06-12-01</font>");
