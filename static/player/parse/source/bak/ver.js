@@ -1,0 +1,1 @@
+﻿document.writeln("<font color=\'#ff0000\'>X3.95正式版</font>");
