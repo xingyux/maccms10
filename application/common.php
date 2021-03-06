@@ -1157,6 +1157,8 @@ function mac_plot_list($vod_plot_name,$vod_plot_detail)
 
 }
 
+
+
 function mac_play_list($vod_play_from,$vod_play_url,$vod_play_server,$vod_play_note,$flag='play')
 {
     $vod_play_from_list = [];
@@ -1226,6 +1228,25 @@ function new_stripslashes($string) {
     return $string;
 }
 
+function mac_screenshot_list($screenshot)
+{
+    $url_list = array();
+    $array_url = explode('#',$screenshot);
+    foreach($array_url as $key=>$val){
+        if(empty($val)) continue;
+
+        list($title, $url) = explode('$', $val);
+        if ( empty($url) ) {
+            $url_list[$key+1]['name'] = ($key+1);
+            $url_list[$key+1]['url'] = $title;
+        }else{
+            $url_list[$key+1]['name'] = $title;
+            $url_list[$key+1]['url'] = $url;
+        }
+    }
+    return $url_list;
+}
+
 function mac_play_list_one($url_one, $from_one, $server_one=''){
     $url_list = array();
     $array_url = explode('#',$url_one);
@@ -1248,8 +1269,6 @@ function mac_play_list_one($url_one, $from_one, $server_one=''){
     }
     return $url_list;
 }
-
-
 
 function mac_filter_words($str)
 {
@@ -1435,6 +1454,9 @@ function mac_url_img($url)
         else{
             $url = MAC_PATH . $url;
         }
+    }
+    elseif(!empty($GLOBALS['config']['upload']['img_key']) && preg_match('/'.$GLOBALS['config']['upload']['img_key'].'/',$url)){
+        $url = $GLOBALS['config']['upload']['img_api'] . '' . $url;
     }
     return $url;
 }

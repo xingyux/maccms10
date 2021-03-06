@@ -86,6 +86,22 @@ CREATE TABLE `mac_admin` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
+-- Table structure for mac_annex
+-- ----------------------------
+DROP TABLE IF EXISTS `mac_annex`;
+CREATE TABLE `mac_annex` (
+  `annex_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `annex_time` int(10) unsigned NOT NULL DEFAULT '0',
+  `annex_file` varchar(255) NOT NULL DEFAULT '',
+  `annex_size` int(10) unsigned NOT NULL DEFAULT '0',
+  `annex_type` varchar(8) NOT NULL DEFAULT '',
+  PRIMARY KEY (`annex_id`),
+  KEY `annex_time` (`annex_time`),
+  KEY `annex_file` (`annex_file`),
+  KEY `annex_type` (`annex_type`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for mac_art
 -- ----------------------------
 DROP TABLE IF EXISTS `mac_art`;
@@ -107,6 +123,7 @@ CREATE TABLE `mac_art` (
   `art_pic` varchar(255) NOT NULL DEFAULT '' ,
   `art_pic_thumb` varchar(255) NOT NULL DEFAULT '' ,
   `art_pic_slide` varchar(255) NOT NULL DEFAULT '' ,
+  `art_pic_screenshot` text,
   `art_blurb` varchar(255) NOT NULL DEFAULT '' ,
   `art_remarks` varchar(100) NOT NULL DEFAULT '' ,
   `art_jumpurl` varchar(150) NOT NULL DEFAULT '' ,
@@ -526,10 +543,10 @@ CREATE TABLE `mac_topic` (
   `topic_time_hits` int(10) unsigned NOT NULL DEFAULT '0' ,
   `topic_time_make` int(10) unsigned NOT NULL DEFAULT '0' ,
   `topic_tag` varchar(255) NOT NULL DEFAULT '' ,
-  `topic_rel_vod` text ,
-  `topic_rel_art` text ,
-  `topic_content` text ,
-  `topic_extend` text ,
+  `topic_rel_vod` text NOT NULL,
+  `topic_rel_art` text NOT NULL,
+  `topic_content` text NOT NULL,
+  `topic_extend` text NOT NULL,
   PRIMARY KEY (`topic_id`),
   KEY `topic_sort` (`topic_sort`) USING BTREE,
   KEY `topic_level` (`topic_level`) USING BTREE,
@@ -570,7 +587,7 @@ CREATE TABLE `mac_type` (
   `type_des` varchar(255) NOT NULL DEFAULT '' ,
   `type_title` varchar(255) NOT NULL DEFAULT '' ,
   `type_union` varchar(255) NOT NULL DEFAULT '',
-  `type_extend` text ,
+  `type_extend` text NOT NULL,
   `type_logo`  VARCHAR( 255 )  NOT NULL DEFAULT  '',
   `type_pic`  VARCHAR( 255 )  NOT NULL DEFAULT  '',
   `type_jumpurl`  VARCHAR( 150 )  NOT NULL DEFAULT  '',
@@ -680,6 +697,7 @@ CREATE TABLE `mac_vod` (
   `vod_pic` varchar(255) NOT NULL DEFAULT '' ,
   `vod_pic_thumb` varchar(255) NOT NULL DEFAULT '' ,
   `vod_pic_slide` varchar(255) NOT NULL DEFAULT '' ,
+  `vod_pic_screenshot` text,
   `vod_actor` varchar(255) NOT NULL DEFAULT '' ,
   `vod_director` varchar(255) NOT NULL DEFAULT '' ,
   `vod_writer` varchar(100) NOT NULL DEFAULT '' ,
@@ -801,6 +819,7 @@ CREATE TABLE `mac_website` (
   `website_sort` int(10) NOT NULL DEFAULT '0',
   `website_jumpurl` varchar(255) NOT NULL DEFAULT '',
   `website_pic` varchar(255) NOT NULL DEFAULT '',
+  `website_pic_screenshot` text,
   `website_logo` varchar(255) NOT NULL DEFAULT '',
   `website_area` varchar(20) NOT NULL DEFAULT '',
   `website_lang` varchar(10) NOT NULL DEFAULT '',

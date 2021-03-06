@@ -7,7 +7,7 @@
 *内部处理key：开头 model/、controller/、只在模块内使用
 */
 return [
-    'lang_ver'=>'1059+',
+    'lang_ver'=>'1069+',
     'hello'  => '欢迎使用',
     'maccms_name'=>'苹果CMS-v10',
     'maccms_copyright'=>'© MacCMS All Rights Reserved.',
@@ -85,7 +85,7 @@ return [
     'just'=>'刚刚',
     'day_after_tomorrow'=>'后天',
     'tomorrow'=>'明天',
-    'year'=>'年',
+    'year'=>'年份',
     'month'=>'月',
     'day'=>'日',
     'yes'=>'是',
@@ -198,6 +198,7 @@ return [
     'area'=>'地区',
     'lang'=>'语言',
     'sex'=>'性别',
+    'sum'=>'共',
     'opt'=>'操作',
     'opt_content'=>'内容操作',
     'name'=>'名称',
@@ -251,13 +252,14 @@ return [
     'pic'=>'图片',
     'pic_thumb'=>'缩略图',
     'pic_slide'=>'海报图',
+    'pic_screenshot'=>'截图',
     'upload'=>'上传',
     'upload_pic'=>'上传图片',
     'blurb'=>'简介',
     'content'=>'详情',
     'blurb_auto_tip'=>'不填写将自动从第一页详情里获取前100个字',
     'up'=>'顶',
-    'down'=>'踩',
+    'hate'=>'踩',
     'rnd_make'=>'随机生成',
     'score'=>'平均分',
     'score_all'=>'总评分',
@@ -479,6 +481,13 @@ return [
     'merge'=>'合并',
     'douban_id'=>'豆瓣ID',
     'rel_name'=>'关联数据名称',
+    'preview'=>'预览',
+    'screenshot_preview'=>'截图预览',
+    'screenshot_tip'=>'每行一个图片地址支持远程url、本地路径、自定义名称备注，例如：
+图1$upload/test.jpg
+图2$https://www.baidu.com/logo.png
+https://www.baidu.com/123.jpg
+    ',
 
     'menu/index'=>'首页',
     'menu/welcome'=>'欢迎页面',
@@ -792,6 +801,7 @@ return [
     'admin/index/title'=>'后台管理中心',
     'admin/index/welcome/title'=>'欢迎页面',
     'admin/index/quickmenu/title'=>'快捷菜单配置',
+    'admin/index/cache_data'=>'发现配置缓存，请及时清理...',
     'admin/index/clear_ok'=>'缓存清理成功',
     'admin/index/clear_err'=>'缓存清理失败',
     'admin/index/iframe'=>'布局切换成功，跳转中',
@@ -1273,29 +1283,20 @@ return [
     'admin/system/configupload/mode_remote'=>'远程访问',
     'admin/system/configupload/remoteurl'=>'图片远程URL',
     'admin/system/configupload/remoteurl_tip'=>'本地图片如存在远程，可使用此功',
-
+    'admin/system/configupload/img_key'=>'反盗链标识',
+    'admin/system/configupload/img_key_tip'=>'需要处理防盗链的域名或关键字多个请用|连接',
+    'admin/system/configupload/img_api'=>'反盗链接口',
+    'admin/system/configupload/img_api_tip'=>'处理防盗链图片的接口地址',
 
     'admin/system/configsms/title'=>'短信发送配置',
     'admin/system/configsms/tip'=>'提示信息：<br>
-                        请务必按照短信接口服务商的要求做好短信签名和短信内容的设置。<br>
-                        腾讯云短信：https://cloud.tencent.com/product/sms<br>
-                        腾讯云短信模板例子：<br>
-                        尊敬的用户，您的注册会员验证码为：{1}，请勿泄漏于他人！<br>
-                        验证码为：{1}，您正在绑定手机，若非本人操作，请勿泄露。<br>
-                        验证码为：{1}，您正在进行密码重置操作，如非本人操作，请忽略本短信！<br>
-                        阿里云短信：https://www.aliyun.com/product/sms<br>
-                        阿里云短信模板例子：<br>
-                        尊敬的用户，您的注册会员验证码为：${code}，请勿泄漏于他人！<br>
-                        验证码为：${code}，您正在绑定手机，若非本人操作，请勿泄露。<br>
-                        验证码为：${code}，您正在进行密码重置操作，如非本人操作，请忽略本短信！<br>',
+                        请务必按照短信接口服务商的要求做好短信签名和短信内容的设置。<br>',
     'admin/system/configsms/type'=>'服务商',
-    'admin/system/configsms/appid_tip'=>'腾讯云对应AppId，阿里云对应KeyId',
-    'admin/system/configsms/appkey_tip'=>'腾讯云对应AppKey，阿里云对应KeySecret',
     'admin/system/configsms/sign'=>'短信签名',
     'admin/system/configsms/tpl_code_reg'=>'注册模板编号',
     'admin/system/configsms/tpl_code_tip'=>'模板编号需要在服务商短信控制台中申请',
     'admin/system/configsms/tpl_code_bind'=>'绑定模板编号',
-    'admin/system/configsms/tpl_code_findpass'=>'注册模板编号',
+    'admin/system/configsms/tpl_code_findpass'=>'找回密码模板编号',
     'admin/system/configsms/test_err'=>'发生错误，请检查是否开启相应扩展库!',
 
 
@@ -1451,7 +1452,6 @@ return [
     'admin/vod/version'=>'资源版本',
     'admin/vod/state'=>'资源类别',
     'admin/vod/isend'=>'完结',
-
     'admin/vod/tpl'=>'内容页模板',
     'admin/vod/tpl_play'=>'播放页模板',
     'admin/vod/tpl_down'=>'下载页模板',
@@ -1464,8 +1464,8 @@ return [
     'admin/vod/select_plot'=>'选择分集剧情',
     'admin/vod/copyright'=>'版权',
     'admin/vod/serialize'=>'连载',
-
-
+    'admin/vod/add_group_play'=>'添加一组播放',
+    'admin/vod/add_group_down'=>'添加一组下载',
     'admin/batch_tip'=>'共%s条数据需要处理，每页%s条，共%s页，正在处理第%s页',
 
 
@@ -1543,6 +1543,7 @@ return [
     'admin/cj/next_page_rule'=>'下一页规则',
     'admin/cj/next_page_tip'=>'请填写下一页超链接中间的代码。如：<a href="http://www.xxx.com/page_1.html">下一页</a>，他的“下一页规则”为“下一页”。',
     'admin/cj/add_group'=>'添加一组',
+
     'admin/cj/content_page'=>'内容分页',
     'admin/cj/no_page'=>'不分页',
     'admin/cj/original_page'=>'按原文分页',
@@ -1598,6 +1599,21 @@ return [
     'admin/group/popedom_play'=>'播放页',
     'admin/group/popedom_down'=>'下载页',
     'admin/group/popedom_trysee'=>'试看',
+
+    'admin/annex/title'=>'附件管理',
+    'admin/annex/check'=>'检测无效文件',
+    'admin/annex/check_complete'=>'无效文件清理完毕',
+    'admin/annex/info_tip'=>'共%s数据，分%s次检测，每次%s条，当前第%s次',
+
+    'admin/annex/init_tip'=>'<strong>附件数据初始化1.0版本</strong><br>
+                            1，将对分类表、视频、文章、网址、演员、角色、会员等表进行检索。<br>
+                            2，将包含本地图片地址内容插入到附件表中。<br>
+                            3，建议升级的版本执行一次。',
+    'admin/annex/init_data'=>'数据初始化',
+    'admin/annex/dir_model'=>'文件夹模式',
+    'admin/annex/check_ok'=>'附件数据初始化结束',
+    'admin/annex/check_tip1'=>'正在检测%s表...共%s条，分%s次检测，每次%s条，当前第%s次',
+    'admin/annex/check_jump'=>'表%s检测完毕，稍后继续...',
 
 
     'admin/images/title'=>'图片管理',
@@ -1797,7 +1813,7 @@ return [
     'admin/upload/test_write_ok'=>'测试写入成功',
     'admin/upload/test_write_ok'=>'写入失败，请检查临时文件目录权限',
     'admin/upload/not_find_extend'=>'未找到第三方扩展上传类库',
-    'admin/upload/no_input_file'=>'未找到上传的文件(原因：表单名可能错误，默认表单名“file”)！',
+    'admin/upload/no_input_file'=>'未找到上传的文件(原因：表单名可能错误，默认表单名“file”或“imgdata”)！',
     'admin/upload/forbidden_ext'=>'非系统允许的上传格式！',
     'admin/upload/upload_success'=>'文件上传成功！',
     'admin/upload/upload_faild'=>'文件上传失败！',
