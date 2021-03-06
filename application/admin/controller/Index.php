@@ -141,16 +141,6 @@ class Index extends Base
         }
     }
 
-    public function checkcache()
-    {
-        $res = 'no';
-        $r = cache('cache_data');
-        if($r=='1'){
-            $res = 'haved';
-        }
-        echo $res;
-    }
-
     public function clear()
     {
         $res = $this->_cache_clear();
@@ -168,9 +158,9 @@ class Index extends Base
             return $this->error(lang('admin/index/clear_ok'));
         }
         if ($val == 1) {
-            cookie('is_iframe', 'yes');
+            cookie('hisi_iframe', 'yes');
         } else {
-            cookie('is_iframe', null);
+            cookie('hisi_iframe', null);
         }
         return $this->success(lang('admin/index/iframe'));
     }

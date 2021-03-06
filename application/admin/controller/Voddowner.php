@@ -47,7 +47,6 @@ class VodDowner extends Base
             if($res===false){
                 return $this->error(lang('save_err'));
             }
-            cache('cache_data','1');
             return $this->success(lang('save_ok'));
         }
 
@@ -66,7 +65,6 @@ class VodDowner extends Base
         if($res===false){
             return $this->error(lang('del_err'));
         }
-        cache('cache_data','1');
         return $this->success(lang('del_ok'));
     }
 
